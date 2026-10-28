@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbe8f2">
+<title>ダイエットサポート</title>
+<style>
+:root{--bg:#fff;--panel:#fff;--ink:#24364b;--muted:#66778a;--line:#dbe5ee;--accent:#4d94ee;--soft:#edf6ff;--mint:#dff5eb;--pink:#f5c5df;--shadow:0 5px 18px rgba(54,83,110,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.55;transition:background .2s;color-scheme:light}
+body.kawaii{--bg:linear-gradient(125deg,#fff0f7 0%,#fbe7f2 32%,#e9f9f0 72%,#dff6ed 100%);--panel:rgba(255,255,255,.82);--ink:#76547d;--muted:#9a7e9f;--line:#f3cde3;--accent:#ed8bc6;--soft:#fff0f8;--mint:#e0f7ed;--shadow:0 7px 22px rgba(220,144,190,.12);background:var(--bg);background-attachment:fixed}
+header{position:sticky;top:0;z-index:5;background:var(--panel);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px max(16px,calc((100vw - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:800;letter-spacing:.03em}.head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+button,input,select{font:inherit}button{border:0;border-radius:10px;padding:10px 14px;background:var(--accent);color:white;font-weight:700;cursor:pointer}button.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--line)}button.danger{background:#fff0f0;color:#a43c50;border:1px solid #f3c5ce}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #84b8ff;outline-offset:2px}
+.layout{max-width:1200px;margin:22px auto;padding:0 16px;display:grid;grid-template-columns:205px minmax(0,1fr);gap:18px}
+nav,.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+nav{padding:14px;height:max-content;position:sticky;top:78px}nav .navbtn{display:block;width:100%;text-align:left;margin:3px 0;background:transparent;color:var(--ink);font-weight:600}nav .navbtn.active{background:var(--soft);border:1px solid var(--line)}
+main{min-width:0}.page{display:none}.page.active{display:block}.page-title{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}.page-title h1{font-size:1.35rem;margin:0}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}.card{padding:16px;min-width:0}.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}
+h2{font-size:1rem;margin:0 0 12px}h3{font-size:.93rem;margin:0 0 8px}.muted{color:var(--muted);font-size:.86rem}.field{margin:10px 0}.field label{display:block;font-weight:650;font-size:.88rem;margin-bottom:5px}.field input,.field select{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:10px;background:var(--panel);color:var(--ink)}.input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.metric{font-size:2rem;font-weight:850;letter-spacing:-.04em;color:var(--ink)}.metric small{font-size:.85rem;letter-spacing:0}.metricbox{background:linear-gradient(135deg,var(--soft),var(--mint));padding:16px;border-radius:12px;text-align:center}.statline{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.9rem}.statline:last-child{border-bottom:0}
+table{width:100%;border-collapse:collapse;font-size:.82rem}th,td{text-align:center;padding:8px 5px;border-bottom:1px solid var(--line);white-space:nowrap}th{background:var(--soft);font-weight:750}td:first-child,th:first-child{text-align:left}.table-wrap{overflow:auto}
+.bar-chart{display:flex;align-items:end;gap:7px;height:135px;padding:10px 4px 0;border-bottom:1px solid var(--line)}.bar-wrap{flex:1;min-width:0;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:5px}.bar{width:min(28px,75%);border-radius:6px 6px 0 0;background:linear-gradient(180deg,#8fd9bf,#35b99a);min-height:3px}.kawaii .bar{background:linear-gradient(180deg,#f4b7dc,#8edbc2)}.bar-label{font-size:.7rem;color:var(--muted)}
+.notice{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:11px;font-size:.83rem}.ascii{display:none;position:fixed;z-index:0;pointer-events:none;white-space:pre;font-family:monospace;font-size:clamp(7px,.8vw,11px);line-height:1.05;color:rgba(255,255,255,.95);text-shadow:0 0 5px #fff,0 0 10px #fff,0 0 18px #fff;filter:blur(1.3px);opacity:.95}.kawaii .ascii{display:block}.ascii.a{top:24%;left:2%}.ascii.b{top:58%;right:1%}.ascii.c{bottom:4%;left:34%}
+footer{max-width:1200px;padding:0 16px 28px;margin:auto;color:var(--muted);font-size:.8rem}.footer-links a{color:var(--ink);text-underline-offset:3px}.palette{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0}.swatch{width:30px;height:30px;border-radius:50%;border:2px solid white;box-shadow:0 0 0 1px var(--line);padding:0}.swatch[aria-pressed=true]{box-shadow:0 0 0 3px var(--accent)}.small{font-size:.78rem}.empty{padding:18px;text-align:center;color:var(--muted)}
+@media(max-width:850px){.layout{grid-template-columns:1fr;margin-top:12px}nav{position:static;display:flex;overflow:auto;gap:4px;padding:8px}nav .navbtn{white-space:nowrap;width:auto;margin:0}.span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12}.ascii.a{left:0}.ascii.b{right:0}}
+@media(min-width:851px) and (max-width:1050px){.span-8,.span-7{grid-column:span 12}.span-5,.span-4{grid-column:span 6}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<pre class="ascii a" aria-hidden="true">⠀⠀⠀⢸⣦⡀⠀⠀⠀⠀⢀⡄
+⠀⠀⠀⢸⣏⠻⣶⣤⡶⢾⡿⠁
+⠀⠀⣀⣼⠷⠀⠀⠁⢀⣿⠃
+⠴⣾⣯⣅⣀⠀⠀⠀⠈⢻⣦⡀
+⠀⠀⠀⠉⢻⡇⣤⣾⣿⣷⣿⣿⣤
+⠀⠀⠀⠀⠸⣿⡿⠏⠀
+⠀⠀⠀⠀⠀⠟⠁</pre>
+<pre class="ascii b" aria-hidden="true">⠀⢀⠤⠤⢄⡀⠀⠀⠀⠀⠀⠀⢀⠤⠒⠒⢤
+⠀⠏⠀⠀⠀⠈⠳⡄⠀⠀⡠⠚⠁⠀⠀⠀⠘⡄
+⢸⠀⠀⠀⠤⣤⣤⠀⠀⠈⣱⣤⣴⡄⠀⠀⡇
+⠘⡀⠀⠀⠀⠀⢈⣷⠤⠴⢺⣀⠀⠀⠀⢀⡇
+⠀⠡⣀⣀⣤⠶⠻⡏⠀⠀⢸⡟⠙⣶⡤⠤⠼
+⠀⠀⢠⡾⠉⠀⢠⡆⠀⠀⢸⠃⠀⠈⢻⣆
+⠀⠀⣿⣠⢶⣄⠀⡇⠀⠀⠘⠃⣀⡤⢌⣈⡀</pre>
+<pre class="ascii c" aria-hidden="true">⡤⠒⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠒⢤
+⢣⡀⠀⠉⠲⢤⣀⡀⠀⠀⠀⠀⠀⠀⢀⣀⡤⠖⠉⠀⢀⡜
+⢸⡉⠒⠄⠀⠀⠀⢉⡙⢢⠀⠀⡔⢋⡉⠀⠀⠀⠠⠒⢉⡇
+⠀⠉⢖⠒⠀⠀⠀⣇⠀⣸⠀⠀⣇⠀⣸⠀⠀⠀⠒⡲⠉
+⠀⠀⠀⠉⠙⠫⠤⠚⠉⠀⠀⠀⠀⠉⠓⠤⠝⠋⠉</pre>
+<header><div class="brand">♡ ダイエットサポート</div><div class="head-actions"><span class="muted" id="todayLabel"></span><button class="secondary" id="themeToggle" type="button">kawaiiモード</button></div></header>
+<div class="layout">
+<nav aria-label="メインメニュー">
+<button class="navbtn active" data-page="daily">⌂ ホーム・毎日記録</button>
+<button class="navbtn" data-page="weekly">▦ 週間記録</button>
+<button class="navbtn" data-page="settings">◉ 色の設定</button>
+<button class="navbtn" data-page="share">↗ リンクを共有</button>
+<button class="navbtn" data-page="help">？ 使い方・引用元</button>
+</nav>
+<main>
+<section class="page active" id="page-daily">
+<div class="page-title"><h1>毎日記録</h1><input id="recordDate" type="date" aria-label="記録日"></div>
+<div class="grid">
+<div class="card span-4"><h2>基本情報</h2><div class="field"><label for="age">年齢</label><input id="age" type="number" min="18" max="100" placeholder="例：25"></div><div class="field"><label for="sex">性別（基礎代謝推定用）</label><select id="sex"><option value="">選択してください</option><option value="male">男性</option><option value="female">女性</option></select></div><div class="input-row"><div class="field"><label for="height">身長（cm）</label><input id="height" type="number" min="100" max="250" step=".1" placeholder="160"></div><div class="field"><label for="weight">体重（kg）</label><input id="weight" type="number" min="20" max="350" step=".1" placeholder="52"></div></div><button id="calcBmr" type="button">基礎代謝を計算</button><div class="metricbox" style="margin-top:12px"><div class="muted">基礎代謝の推定値</div><div class="metric" id="bmrValue">— <small>kcal/日</small></div></div><p class="muted small">日本人の基礎代謝基準値（年齢・性別別）×体重で推定します。公的資料にない年齢区分は計算対象外です。</p></div>
+<div class="card span-4"><h2>1日の記録</h2><div class="field"><label for="steps">歩数（歩）</label><input id="steps" type="number" min="0" max="100000" step="1" placeholder="8000"></div><div class="field"><label for="intake">摂取カロリー（kcal）</label><input id="intake" type="number" min="0" max="10000" step="1" placeholder="1800"></div><div class="field"><label for="note">メモ（任意）</label><input id="note" type="text" maxlength="180" placeholder="体調・運動など"></div><button id="saveRecord" type="button">記録を保存・計算</button><p class="muted small">歩行消費は歩幅・体重から距離を概算し、約0.5 kcal/kg/kmで推定します。個人差があるため目安です。</p></div>
+<div class="card span-4"><h2>今日のカロリー収支</h2><div class="metricbox"><div class="muted">摂取 −（基礎代謝＋歩行推定消費）</div><div class="metric" id="balanceValue">— <small>kcal</small></div></div><div class="statline"><span>摂取カロリー</span><strong id="showIntake">— kcal</strong></div><div class="statline"><span>基礎代謝（推定）</span><strong id="showBmr">— kcal</strong></div><div class="statline"><span>歩行による消費（推定）</span><strong id="showWalk">— kcal</strong></div><div class="notice" style="margin-top:12px">この収支は指定された簡易計算です。基礎代謝は総消費エネルギーではなく、日常活動・食事誘発性熱産生などを含まないため、体重変化を正確に予測する値ではありません。</div></div>
+</div>
+</section>
+<section class="page" id="page-weekly">
+<div class="page-title"><h1>週間記録・レポート</h1><button class="secondary" id="thisWeek">今週に戻る</button></div>
+<div class="grid"><div class="card span-8"><h2>7日間の記録</h2><div class="table-wrap"><table><thead><tr><th>日付</th><th>体重</th><th>基礎代謝</th><th>歩数</th><th>摂取</th><th>収支</th></tr></thead><tbody id="weekRows"></tbody></table></div><p class="muted small">体重：kg、基礎代謝・摂取・収支：kcal、歩数：歩。</p></div>
+<div class="card span-4"><h2>週間合計</h2><div class="metricbox"><div class="muted">7日間のカロリー収支合計</div><div class="metric" id="weekBalance">— <small>kcal</small></div></div><div class="statline"><span>摂取カロリー合計</span><strong id="weekIntake">—</strong></div><div class="statline"><span>歩数合計</span><strong id="weekSteps">—</strong></div><div class="bar-chart" id="chart" aria-label="日ごとのカロリー収支グラフ"></div></div>
+<div class="card span-12"><h2>今週のレポート・アドバイス</h2><div id="report" class="notice">記録を保存すると、記録済みデータに基づくルール式レポートが表示されます。</div><p class="muted small">文章は事前定義した条件分岐テンプレートで作成します。AIによる診断ではありません。</p></div></div>
+</section>
+<section class="page" id="page-settings"><div class="page-title"><h1>色の設定</h1></div><div class="grid"><div class="card span-6"><h2>テーマ</h2><p>背景の雰囲気を選べます。</p><div class="actions"><button id="simpleMode" class="secondary" type="button">シンプル（白）</button><button id="kawaiiMode" type="button">kawaii（ピンク〜ミント）</button></div></div><div class="card span-6"><h2>アクセントカラー</h2><p class="muted">ボタンなどの色を選択してください。</p><div class="palette"><button class="swatch" style="background:#4d94ee" data-color="#4d94ee" aria-label="ブルー" aria-pressed="true"></button><button class="swatch" style="background:#ed8bc6" data-color="#ed8bc6" aria-label="ピンク" aria-pressed="false"></button><button class="swatch" style="background:#71cbb0" data-color="#71cbb0" aria-label="ミント" aria-pressed="false"></button><button class="swatch" style="background:#b6a0ed" data-color="#b6a0ed" aria-label="ラベンダー" aria-pressed="false"></button><button class="swatch" style="background:#efb58c" data-color="#efb58c" aria-label="アプリコット" aria-pressed="false"></button></div><p class="muted small">選んだテーマと色はこのブラウザに保存されます。</p></div></div></section>
+<section class="page" id="page-share"><div class="page-title"><h1>リンクを共有</h1></div><div class="card"><h2>公開サイトのURLを共有</h2><p>公開後はブラウザのアドレスバーに表示されるURLを共有してください。記録データはこの端末・ブラウザ内に保存され、リンクを開いた他の人へは共有されません。</p><div class="field"><label for="siteUrl">サイトURL（公開後に入力）</label><input id="siteUrl" type="url" placeholder="https://ユーザー名.github.io/リポジトリ名/"></div><div class="actions"><button id="copyUrl" type="button">URLをコピー</button></div><p class="muted small" id="copyStatus" role="status"></p><div class="notice">注意：GitHub Pagesの公開サイトは誰でも閲覧できます。健康情報や個人情報をHTMLファイルや公開リポジトリに書き込まないでください。</div></div></section>
+<section class="page" id="page-help"><div class="page-title"><h1>使い方・引用元</h1></div><div class="grid"><div class="card span-6"><h2>使い方</h2><ol><li>年齢・性別・身長・体重を入力して基礎代謝を計算。</li><li>日付を選び、歩数と摂取カロリーを入力。</li><li>「記録を保存・計算」を押すと日次データを保存。</li><li>「週間記録」で直近7日間の合計とレポートを確認。</li><li>テーマとアクセントカラーは「色の設定」から変更。</li></ol><p class="muted small">記録は同じブラウザのローカルストレージに保存されます。ブラウザデータを消去すると記録も消えることがあります。</p></div><div class="card span-6"><h2>計算方法・公的参考資料</h2><p><strong>基礎代謝：</strong>厚生労働省 e-ヘルスネットに掲載された日本人の基礎代謝基準値（kcal/kg/日）を年齢・性別に応じて選び、体重を掛けて推定します。</p><p><strong>歩行消費：</strong>身長から歩幅を概算して歩行距離を推定し、体重と距離から概算します。個人の歩幅・速度などを測定した値ではありません。</p><p><strong>収支：</strong>摂取カロリー −（基礎代謝推定値＋歩行消費推定値）。他の日常活動や食事誘発性熱産生を含まないため、総消費エネルギーや医学的評価とは異なります。</p><div class="footer-links"><p><a href="https://kennet.mhlw.go.jp/information/information/food/e-07-002" target="_blank" rel="noopener noreferrer">厚生労働省 e-ヘルスネット：加齢とエネルギー代謝</a></p><p><a href="https://kennet.mhlw.go.jp/information/information/exercise/s-02-003" target="_blank" rel="noopener noreferrer">厚生労働省 e-ヘルスネット：身体活動とエネルギー代謝</a></p><p><a href="https://kennet.mhlw.go.jp/information/information/food/e-02-001" target="_blank" rel="noopener noreferrer">厚生労働省 e-ヘルスネット：肥満と健康</a></p></div></div><div class="card span-12"><h2>大切な注意事項</h2><p>本サイトは健康管理の参考用で、医療・栄養指導・診断を提供するものではありません。基礎代謝や歩行消費、カロリー収支はいずれも推定値です。18歳未満、妊娠・授乳中、治療中、摂食障害の既往がある場合などは、減量目標を自己判断せず医師・管理栄養士に相談してください。過度な食事制限は避けてください。</p></div></div></section>
+</main></div>
+<footer>記録はこの端末のブラウザ内に保存されます。サイトを公開しても、記録データが自動的に共有されることはありません。</footer>
+<script>
+const $=id=>document.getElementById(id);
+const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const storageKey='dietSupportRecordsV1';
+let records=JSON.parse(localStorage.getItem(storageKey)||'{}');
+let currentBmr=null;
+const bmrStandards=[
+ {min:18,max:29,male:24.0,female:22.1},{min:30,max:49,male:22.3,female:21.7},
+ {min:50,max:69,male:21.5,female:20.7},{min:70,max:100,male:21.5,female:20.7}
+];
+function getBmr(age,sex,weight){const row=bmrStandards.find(r=>age>=r.min&&age<=r.max);if(!row||!sex||!weight)return null;return Math.round(row[sex]*weight)}
+function getWalk(weight,height,steps){if(!weight||!height||steps==null)return null;const stride=height/100*0.413;const km=steps*stride/1000;return Math.round(weight*km*0.5)}
+function fmt(n){return n==null?'—':Math.round(n).toLocaleString('ja-JP')}
+function readProfile(){return {age:Number($('age').value),sex:$('sex').value,height:Number($('height').value),weight:Number($('weight').value)}}
+function calc(){const p=readProfile();currentBmr=getBmr(p.age,p.sex,p.weight);$('bmrValue').innerHTML=currentBmr==null?'— <small>kcal/日</small>':`${fmt(currentBmr)} <small>kcal/日</small>`;return currentBmr}
+function updatePreview(){currentBmr=calc();const p=readProfile();const steps=$('steps').value===''?null:Number($('steps').value);const intake=$('intake').value===''?null:Number($('intake').value);const walk=getWalk(p.weight,p.height,steps);const balance=currentBmr!=null&&walk!=null&&intake!=null?intake-currentBmr-walk:null;$('balanceValue').innerHTML=balance==null?'— <small>kcal</small>':`${balance>0?'+':''}${fmt(balance)} <small>kcal</small>`;$('showIntake').textContent=intake==null?'— kcal':`${fmt(intake)} kcal`;$('showBmr').textContent=currentBmr==null?'— kcal':`${fmt(currentBmr)} kcal`;$('showWalk').textContent=walk==null?'— kcal':`${fmt(walk)} kcal`}
+function renderCurrent(){const date=$('recordDate').value;const r=records[date];if(r){$('age').value=r.age??'';$('sex').value=r.sex??'';$('height').value=r.height??'';$('weight').value=r.weight??'';$('steps').value=r.steps??'';$('intake').value=r.intake??'';$('note').value=r.note??''}else{$('steps').value='';$('intake').value='';$('note').value=''}updatePreview()}
+function save(){const p=readProfile(),steps=$('steps').value===''?null:Number($('steps').value),intake=$('intake').value===''?null:Number($('intake').value),date=$('recordDate').value;if(!date){alert('記録日を選択してください。');return}if(!p.age||!p.sex||p.age<18||p.age>100||!p.height||!p.weight){alert('基礎代謝の推定には18歳以上の年齢・性別・身長・体重を入力してください。');return}if(steps==null||intake==null||steps<0||intake<0){alert('歩数と摂取カロリーを入力してください。');return}const bmr=getBmr(p.age,p.sex,p.weight),walk=getWalk(p.weight,p.height,steps);records[date]={...p,steps,intake,note:$('note').value,bmr,walk,balance:intake-bmr-walk};localStorage.setItem(storageKey,JSON.stringify(records));renderCurrent();renderWeek();alert('記録を保存しました。')}
+function dateAdd(date,days){const d=new Date(date+'T12:00:00');d.setDate(d.getDate()+days);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function renderWeek(){const end=$('recordDate').value||todayISO(),start=dateAdd(end,-6),days=Array.from({length:7},(_,i)=>dateAdd(start,i));let total=0,intake=0,steps=0,count=0;const tbody=$('weekRows');tbody.innerHTML='';const chart=$('chart');chart.innerHTML='';const vals=[];days.forEach(d=>{const r=records[d];if(r){count++;total+=r.balance;intake+=r.intake;steps+=r.steps;vals.push(r.balance)}else vals.push(null);const tr=document.createElement('tr');const valsRow=[d.slice(5).replace('-','/'),r?Number(r.weight).toFixed(1):'—',r?fmt(r.bmr):'—',r?fmt(r.steps):'—',r?fmt(r.intake):'—',r?fmt(r.balance):'—'];valsRow.forEach((v,i)=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});tbody.appendChild(tr)});$('weekBalance').innerHTML=count?`${total>0?'+':''}${fmt(total)} <small>kcal</small>`:'— <small>kcal</small>';$('weekIntake').textContent=count?`${fmt(intake)} kcal`:'—';$('weekSteps').textContent=count?`${fmt(steps)} 歩`:'—';const abs=Math.max(1,...vals.filter(v=>v!=null).map(v=>Math.abs(v)));days.forEach((d,i)=>{const wrap=document.createElement('div');wrap.className='bar-wrap';const bar=document.createElement('div');bar.className='bar';bar.style.height=vals[i]==null?'3px':`${Math.max(6,Math.abs(vals[i])/abs*72)}%`;bar.title=vals[i]==null?'未記録':`${fmt(vals[i])} kcal`;const label=document.createElement('div');label.className='bar-label';label.textContent=d.slice(8);wrap.append(bar,label);chart.appendChild(wrap)});const report=$('report');if(!count){report.textContent='この期間の記録はありません。毎日記録を保存すると、ここに週間レポートが表示されます。';return}const avg=Math.round(intake/count),avgSteps=Math.round(steps/count);let advice=[];if(avgSteps<6000)advice.push('歩数の平均は'+fmt(avgSteps)+'歩/日です。無理のない範囲で、短い散歩や日常の移動を少しずつ増やすことを検討しましょう。');else advice.push('歩数は平均'+fmt(avgSteps)+'歩/日でした。体調に合わせて、無理のない活動習慣を続けましょう。');if(total<0)advice.push('指定した簡易計算では週間収支はマイナスでした。ただし、この値だけで実際の体脂肪変化を判断することはできません。');else advice.push('指定した簡易計算では週間収支はゼロ以上でした。食事量・活動量・記録漏れを振り返り、極端な制限は避けましょう。');report.innerHTML=`<strong>記録日数：${count}/7日</strong><br>週間収支合計：${fmt(total)} kcal<br>平均摂取カロリー：${fmt(avg)} kcal/記録日<br>平均歩数：${fmt(avgSteps)} 歩/記録日<br><br><strong>振り返り</strong><br>${advice.map(a=>'・'+a).join('<br>')}<br><br><span class="muted">これは記録値から作成した定型的な振り返りであり、医療的な助言や減量効果の予測ではありません。</span>`}
+function setTheme(k){document.body.classList.toggle('kawaii',k);localStorage.setItem('dietTheme',k?'kawaii':'simple');$('themeToggle').textContent=k?'シンプルモード':'kawaiiモード'}
+document.querySelectorAll('.navbtn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+btn.dataset.page));if(btn.dataset.page==='weekly')renderWeek()}));
+$('recordDate').value=todayISO();$('todayLabel').textContent=new Date().toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'});$('recordDate').addEventListener('change',renderCurrent);$('calcBmr').addEventListener('click',calc);['age','sex','height','weight','steps','intake'].forEach(id=>$(id).addEventListener('input',updatePreview));$('saveRecord').addEventListener('click',save);$('thisWeek').addEventListener('click',()=>{ $('recordDate').value=todayISO();renderCurrent();renderWeek()});$('themeToggle').addEventListener('click',()=>setTheme(!document.body.classList.contains('kawaii')));$('simpleMode').addEventListener('click',()=>setTheme(false));$('kawaiiMode').addEventListener('click',()=>setTheme(true));document.querySelectorAll('.swatch').forEach(b=>b.addEventListener('click',()=>{document.documentElement.style.setProperty('--accent',b.dataset.color);localStorage.setItem('dietAccent',b.dataset.color);document.querySelectorAll('.swatch').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))}));$('copyUrl').addEventListener('click',async()=>{const url=$('siteUrl').value.trim()||location.href;try{await navigator.clipboard.writeText(url);$('copyStatus').textContent='URLをコピーしました。'}catch(e){$('siteUrl').value=url;$('siteUrl').select();$('copyStatus').textContent='URL欄を選択しました。コピーしてください。'}});setTheme(localStorage.getItem('dietTheme')==='kawaii');const savedAccent=localStorage.getItem('dietAccent');if(savedAccent){document.documentElement.style.setProperty('--accent',savedAccent);document.querySelectorAll('.swatch').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.color===savedAccent)))}renderCurrent();renderWeek();
+</script>
+</body>
+</html>
